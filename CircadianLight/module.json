@@ -1,0 +1,15 @@
+{
+    "id": "{6C34256A-2735-4FFE-9F9D-10A6D92DEAD7}",
+    "name": "CircadianLight",
+    "type": 3,
+    "vendor": "",
+    "aliases": [
+        "FLARE Lichtautomatik",
+        "Tageslicht-Zone"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "FLARE",
+    "url": "https://github.com/Hagi0815/FlareIPS"
+}

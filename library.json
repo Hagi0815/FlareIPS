@@ -1,0 +1,12 @@
+{
+    "id": "{6BD72244-8480-4EAB-90F7-7CC6380439EB}",
+    "name": "FLARE für IP-Symcon",
+    "author": "Hagi0815",
+    "url": "https://github.com/Hagi0815/FlareIPS",
+    "compatibility": {
+        "version": "7.0"
+    },
+    "version": "1.0",
+    "build": 1,
+    "date": 1793030400
+}

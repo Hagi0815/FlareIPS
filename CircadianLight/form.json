@@ -1,0 +1,175 @@
+{
+    "elements": [
+        {
+            "type": "ExpansionPanel",
+            "caption": "Leuchten",
+            "expanded": true,
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Pro Leuchte die Statusvariablen der Hue-Instanz wählen. Status ist Pflicht, der Rest optional. Erreichbar = Variable, die bei Wandschalter-Betrieb wieder auf 'erreichbar' springt."
+                },
+                {
+                    "type": "List",
+                    "name": "Lights",
+                    "caption": "Leuchten",
+                    "rowCount": 6,
+                    "add": true,
+                    "delete": true,
+                    "columns": [
+                        { "caption": "Status (an/aus)", "name": "Status", "width": "200px", "add": 0, "edit": { "type": "SelectVariable" } },
+                        { "caption": "Helligkeit", "name": "Brightness", "width": "200px", "add": 0, "edit": { "type": "SelectVariable" } },
+                        { "caption": "Farbtemperatur", "name": "ColorTemp", "width": "200px", "add": 0, "edit": { "type": "SelectVariable" } },
+                        { "caption": "Erreichbar", "name": "Reachable", "width": "200px", "add": 0, "edit": { "type": "SelectVariable" } },
+                        { "caption": "Helligkeit %", "name": "Factor", "width": "auto", "add": 100, "edit": { "type": "NumberSpinner", "minimum": 1, "maximum": 200, "suffix": " %" } }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Anwesenheit (optional)",
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Ohne Sensor werden nur eingeschaltete Leuchten der Kurve nachgeführt. Mit Sensor schaltet die Zone selbst ein und aus."
+                },
+                {
+                    "type": "List",
+                    "name": "MotionSensors",
+                    "caption": "Bewegungs-/Präsenzvariablen (eine aktiv = Raum belegt)",
+                    "rowCount": 3,
+                    "add": true,
+                    "delete": true,
+                    "columns": [
+                        { "caption": "Variable", "name": "Variable", "width": "auto", "add": 0, "edit": { "type": "SelectVariable" } }
+                    ]
+                },
+                { "type": "NumberSpinner", "name": "OffDelay", "caption": "Ausschaltverzögerung", "suffix": " s", "minimum": 0 },
+                { "type": "NumberSpinner", "name": "IdleBrightness", "caption": "Nachtlicht bei leerem Raum (0 = aus)", "suffix": " %", "minimum": 0, "maximum": 100 },
+                { "type": "CheckBox", "name": "IdleNightOnly", "caption": "Nachtlicht nur in der Phase Nacht" }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Phasen",
+            "items": [
+                {
+                    "type": "Label",
+                    "caption": "Die Beginnzeiten sind Variablen der Instanz (WebFront, Ereignisse, Skripte). Übergang = Minuten VOR Phasenbeginn, in denen überblendet wird (0 = Sprung)."
+                },
+                { "type": "Label", "caption": "Morgen", "bold": true },
+                {
+                    "type": "RowLayout",
+                    "items": [
+                        { "type": "NumberSpinner", "name": "MorningBrightness", "caption": "Helligkeit", "suffix": " %", "minimum": 0, "maximum": 100 },
+                        { "type": "NumberSpinner", "name": "MorningColorTemp", "caption": "Farbtemperatur", "suffix": " K", "minimum": 2000, "maximum": 6500 },
+                        { "type": "NumberSpinner", "name": "MorningTransition", "caption": "Übergang", "suffix": " min", "minimum": 0 },
+                        { "type": "SelectScript", "name": "MorningScene", "caption": "Szene statt Kurve" }
+                    ]
+                },
+                { "type": "Label", "caption": "Tag", "bold": true },
+                {
+                    "type": "RowLayout",
+                    "items": [
+                        { "type": "NumberSpinner", "name": "DayBrightness", "caption": "Helligkeit", "suffix": " %", "minimum": 0, "maximum": 100 },
+                        { "type": "NumberSpinner", "name": "DayColorTemp", "caption": "Farbtemperatur", "suffix": " K", "minimum": 2000, "maximum": 6500 },
+                        { "type": "NumberSpinner", "name": "DayTransition", "caption": "Übergang", "suffix": " min", "minimum": 0 },
+                        { "type": "SelectScript", "name": "DayScene", "caption": "Szene statt Kurve" }
+                    ]
+                },
+                { "type": "CheckBox", "name": "DayDrift", "caption": "Tag wird über den Nachmittag langsam wärmer (Richtung Abend-Farbtemperatur)" },
+                { "type": "Label", "caption": "Abend (folgt dem Sonnenuntergang, begrenzt durch 'Abend frühestens/spätestens')", "bold": true },
+                {
+                    "type": "RowLayout",
+                    "items": [
+                        { "type": "NumberSpinner", "name": "EveningBrightness", "caption": "Helligkeit", "suffix": " %", "minimum": 0, "maximum": 100 },
+                        { "type": "NumberSpinner", "name": "EveningColorTemp", "caption": "Farbtemperatur", "suffix": " K", "minimum": 2000, "maximum": 6500 },
+                        { "type": "NumberSpinner", "name": "EveningTransition", "caption": "Übergang", "suffix": " min", "minimum": 0 },
+                        { "type": "SelectScript", "name": "EveningScene", "caption": "Szene statt Kurve" }
+                    ]
+                },
+                { "type": "NumberSpinner", "name": "SunsetOffset", "caption": "Versatz zum Sonnenuntergang", "suffix": " min" },
+                { "type": "Label", "caption": "Nacht", "bold": true },
+                {
+                    "type": "RowLayout",
+                    "items": [
+                        { "type": "NumberSpinner", "name": "NightBrightness", "caption": "Helligkeit", "suffix": " %", "minimum": 0, "maximum": 100 },
+                        { "type": "NumberSpinner", "name": "NightColorTemp", "caption": "Farbtemperatur", "suffix": " K", "minimum": 2000, "maximum": 6500 },
+                        { "type": "NumberSpinner", "name": "NightTransition", "caption": "Übergang", "suffix": " min", "minimum": 0 },
+                        { "type": "SelectScript", "name": "NightScene", "caption": "Szene statt Kurve" }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Standort",
+            "items": [
+                { "type": "Label", "caption": "Breite/Länge 0 = automatisch aus dem Location-Modul. Alternativ eine Sonnenuntergangs-Variable wählen." },
+                {
+                    "type": "RowLayout",
+                    "items": [
+                        { "type": "NumberSpinner", "name": "Latitude", "caption": "Breitengrad", "digits": 5 },
+                        { "type": "NumberSpinner", "name": "Longitude", "caption": "Längengrad", "digits": 5 }
+                    ]
+                },
+                { "type": "SelectVariable", "name": "SunsetVariable", "caption": "Sonnenuntergang (Fallback)" }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Erweitert",
+            "items": [
+                { "type": "NumberSpinner", "name": "UpdateInterval", "caption": "Abgleich alle", "suffix": " s", "minimum": 10 },
+                { "type": "NumberSpinner", "name": "BrightnessDeadband", "caption": "Helligkeit nur senden ab Abweichung", "suffix": " %", "minimum": 0 },
+                { "type": "NumberSpinner", "name": "ColorTempDeadband", "caption": "Farbtemperatur nur senden ab Abweichung", "suffix": " K", "minimum": 0 },
+                {
+                    "type": "Select",
+                    "name": "ColorTempUnit",
+                    "caption": "Einheit Farbtemperatur-Variable",
+                    "options": [
+                        { "caption": "Automatisch (Profil)", "value": 0 },
+                        { "caption": "Kelvin", "value": 1 },
+                        { "caption": "Mired (Mirek)", "value": 2 }
+                    ]
+                },
+                { "type": "NumberSpinner", "name": "SendDelay", "caption": "Pause zwischen Leuchten", "suffix": " ms", "minimum": 0, "maximum": 2000 }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "type": "RowLayout",
+            "items": [
+                { "type": "Button", "caption": "Jetzt abgleichen", "onClick": "FLARE_Update($id, true);" },
+                { "type": "Button", "caption": "Overrides zurücksetzen", "onClick": "FLARE_ClearOverrides($id); FLARE_Update($id, true);" },
+                { "type": "Button", "caption": "Vorschau aktualisieren", "onClick": "IPS_RequestAction($id, 'Preview', 0);" }
+            ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Vorschau: Tagesverlauf heute (gespeicherte Einstellungen)",
+            "items": [
+                {
+                    "type": "List",
+                    "name": "Preview",
+                    "rowCount": 12,
+                    "add": false,
+                    "delete": false,
+                    "columns": [
+                        { "caption": "Uhrzeit", "name": "Time", "width": "90px" },
+                        { "caption": "Phase", "name": "Phase", "width": "160px" },
+                        { "caption": "Helligkeit", "name": "Brightness", "width": "100px" },
+                        { "caption": "Farbtemperatur", "name": "ColorTemp", "width": "auto" }
+                    ],
+                    "values": []
+                }
+            ]
+        }
+    ],
+    "status": [
+        { "code": 102, "icon": "active", "caption": "Zone aktiv" },
+        { "code": 104, "icon": "inactive", "caption": "Keine Leuchten konfiguriert" }
+    ]
+}
